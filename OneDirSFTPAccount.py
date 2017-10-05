@@ -2,11 +2,9 @@ import os, sys, fileinput
 
 print("WARNING: This is only recommended for use on fresh SSHD installations (tested on a fresh DigitalOcean Debian configuration). Use on already changed sshd configurations may cause problems as this will change some of the lines in the SSHD config and will add a few onto the end.")
 continue_with_script = input("Are you sure you want to continue? [y/n] ")
-while True:
-  if continue_with_script.lower() == "y" or "yes":
-    break
-  else:
-    sys.exit()
+
+if continue_with_script.lower() != "y" or "yes":
+  sys.exit()
 
 group_name = input("Group name [Default: sftp_group]: ").strip() or "sftp_group"
 restricted_dir = input("Directory to restrict to [Default: /home/{group name}]: ").strip() or "/home/" + group_name
